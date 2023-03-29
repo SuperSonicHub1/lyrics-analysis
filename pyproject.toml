@@ -15,6 +15,11 @@ nltk = "^3.8.1"
 deep-phonemizer = "^0.0.17"
 panphon = "^0.20.0"
 rhyme-trie = {git = "https://github.com/SuperSonicHub1/rhyme_trie/"}
+matplotlib = "^3.7.0"
+wordcloud = "^1.8.2.2"
+flask = "^2.2.3"
+mplcairo = "^0.5"
+pygobject = "^3.42.2"
 
 
 [build-system]

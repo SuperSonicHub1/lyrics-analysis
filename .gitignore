@@ -3,3 +3,8 @@ wasabi
 apache-jena-fuseki-4.7.0
 apache-jena-4.7.0
 lyrics
+output
+*.png
+parsings
+*.csv
+the_fever.txt

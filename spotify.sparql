@@ -1,0 +1,38 @@
+# ./apache-jena-fuseki-4.7.0/fuseki-server --loc wasabi/tdb/ /wasabi
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix schema:  <http://schema.org/>
+prefix rr:      <http://www.w3.org/ns/r2rml#> 
+prefix mo:      <http://purl.org/ontology/mo/> 
+prefix owl:     <http://www.w3.org/2002/07/owl#> 
+prefix wsb:     <http://ns.inria.fr/wasabi/ontology/> 
+prefix xsd:     <http://www.w3.org/2001/XMLSchema#> 
+prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> 
+prefix dbo:     <http://dbpedia.org/ontology/> 
+prefix rml:     <http://semweb.mmlab.be/ns/rml#> 
+prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix dcterms:  <http://purl.org/dc/terms/> 
+prefix xrr:     <http://i3s.unice.fr/xr2rml#> 
+prefix foaf:    <http://xmlns.com/foaf/0.1/> 
+
+
+SELECT ?song ?title ?rank ?spotify ?album (YEAR(?release_date) as ?release_year) ?artist ?artist_name ?genre 
+WHERE {
+  ?song a wsb:Song;
+    wsb:language_detected "english";
+    dcterms:title ?title;
+    wsb:rank ?rank;
+    wsb:spotify_page ?spotify;
+  	schema:album ?album.
+  ?album mo:performer ?artist;
+         mo:genre ?genre;
+  		 schema:releaseDate ?release_date.
+  ?artist rdfs:label ?artist_name.
+#  FILTER (CONTAINS(?genre, "Hip Hop")).
+#  FILTER (CONTAINS(?genre, "Pop")).
+#  FILTER (CONTAINS(?genre, "Rock")).
+  FILTER (CONTAINS(?genre, "Blues")).
+}
+ORDER BY DESC(?rank)
+LIMIT 100000
